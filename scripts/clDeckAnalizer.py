@@ -66,6 +66,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'レジギガス') & (df['ability'] == 'こだいのえいち')]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'レジアイス') & (df['move1'] == 'レジゲート')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -101,6 +102,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'オリジンパルキアVSTAR') & (df['move1'] == 'あくうのうねり') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'キュレムVMAX') & (df['ability'] == 'はくぎんせかい')]
         newDf = self.getNewDfFromDeckIDNotIn(df,filterDf)
         return (newDf)
@@ -111,6 +113,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'キュレムVMAX') & (df['ability'] == 'はくぎんせかい')]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'オリジンパルキアVSTAR') & (df['move1'] == 'あくうのうねり')]
         newDf = self.getNewDfFromDeckIDNotIn(df,filterDf)
         return (newDf)
@@ -121,6 +124,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'オリジンパルキアVSTAR') & (df['move1'] == 'あくうのうねり')]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'キュレムVMAX') & (df['ability'] == 'はくぎんせかい') & (df['count'] >= 1)]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -139,6 +143,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'アルセウスVSTAR') & (df['move1'] == 'トリニティノヴァ') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'そらをとぶピカチュウVMAX') & (df['move1'] == 'ダイバルーン')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -149,6 +154,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'アルセウスVSTAR') & (df['move1'] == 'トリニティノヴァ')]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ジメレオン') & (df['ability'] == 'うらこうさく')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -167,6 +173,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'イベルタル') & (df['move1'] == 'はかいのさけび')]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
 
         id_List = []
 
@@ -201,6 +208,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'フリーザー') & (df['move2'] == 'ワイルドフリーズ')]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ジメレオン') & (df['ability'] == 'うらこうさく')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -212,6 +220,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'インテレオン') & (df['ability'] == 'うらこうさく')]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ジメレオン') & (df['ability'] == 'うらこうさく')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -222,6 +231,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'クワガノンV') & (df['move1'] == 'パラライズボルト')]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'レジエレキVMAX') & (df['ability'] == 'トランジスタ')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -232,6 +242,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'ムゲンダイナVMAX') & (df['ability'] == 'ムゲンゾーン')]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ブラッキーVMAX') & (df['ability'] == 'ダークシグナル')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -242,6 +253,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'ムゲンダイナVMAX') & (df['ability'] == 'ムゲンゾーン') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ガラルマタドガス') & (df['ability'] == 'かがくへんかガス')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -252,6 +264,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'クロバットVMAX') & (df['move1'] == 'ステルスポイズン') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ガラルマタドガス') & (df['ability'] == 'かがくへんかガス')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -270,6 +283,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'ゾロアーク') & (df['ability'] == 'げんえいへんげ') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ゾロア')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -288,6 +302,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'ジュラルドンVMAX') & (df['ability'] == 'まてんろう') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'アルセウスVSTAR') & (df['move1'] == 'トリニティノヴァ')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -298,6 +313,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'ハピナスV') & (df['ability'] == 'しぜんかいふく') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ミルタンク') & (df['ability'] == 'ミラクルボディ')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -308,6 +324,7 @@ class CLDeckAnalizer:
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
         filterDf = df[(df['name'] == 'ミュウツーV-UNION') & (df['ability'] == 'フォトンバリア')]
+        if len(df) == 0: return df
         df = self.getNewDfFromDeckID(df,filterDf)
         filterDf = df[(df['name'] == 'アルセウスVSTAR') & (df['move1'] == 'トリニティノヴァ') & (df['count'] >= 1)]
         newDf = self.getNewDfFromDeckID(df,filterDf)
@@ -328,6 +345,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'ソルロック') & (df['ability'] == 'サンエナジー') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ルナトーン') & (df['move1'] == 'サイクルドロー')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -354,6 +372,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'ウッウ') & (df['ability'] == 'ロストプロバイド')]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'キュワワー') & (df['ability'] == 'はなえらび')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -364,6 +383,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'ヒスイゾロアークVSTAR') & (df['move1'] == 'のろいをきざむ')]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ゲンガー') & (df['ability'] == 'ならくのうらもん')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -374,6 +394,7 @@ class CLDeckAnalizer:
         df = df[~result]
         filterDf = df[(df['name'] == 'アイアント') & (df['move2'] == 'くいあらす')]
         df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'のろいのスコップ')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)

@@ -58,6 +58,7 @@ for index, date in enumerate(reversed(dateList)):
     enddate = date + datetime.timedelta(days=7)
     print(enddate)
     dfA = df[(df['date'] >= begindate) & (df['date'] < enddate)]
+    dfB = dfA[(dfA['rank'] == 1)]
 
     analizer = clDeckAnalizer.CLDeckAnalizer()
 
@@ -68,6 +69,7 @@ for index, date in enumerate(reversed(dateList)):
         'enddate' : enddate.strftime('%Y-%m-%d %H:%M:%S'),
         'card_list': analizer.getCardIdRow(dfA).to_dict(orient='records'),
         'deck_type': analizer.getDeckType(dfA),
+        'deck_type_rank1': analizer.getDeckType(dfB),
     })
 
 with open('./dist/cl.json', 'w') as f:

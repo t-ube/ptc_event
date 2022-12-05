@@ -1,3 +1,17 @@
+import pandas as pd
+
+class CLDeckDummyCardProvider:
+    def get(self, cl_deck: pd.DataFrame, card_list: pd.DataFrame):
+        cl_deck['card_id'] = cl_deck['card_id'].astype(str)
+        card_list['official_id'] = card_list['official_id'].astype(str)
+        app_card_id = card_list['official_id'].to_list()
+        result = cl_deck['card_id'].apply(lambda x: any(char in x for char in app_card_id))
+        targetDf = cl_deck[~result]
+        # 重複はなくす
+        temp = card_list[card_list.duplicated(['name'], keep='last') == False]
+        df = pd.merge(targetDf, temp, left_on='card_name', right_on='name')
+        return df
+
 class CLDeckListProvider:
 
     # デッキIDリスト生成

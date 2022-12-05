@@ -1,3 +1,27 @@
+class CLDeckListProvider:
+
+    # デッキIDリスト生成
+    def _getDeckIDList(self,df):
+        dup = df[['deck_id']]
+        unDup = dup[dup.duplicated(keep='last') == False]
+        return unDup['deck_id'].to_list()
+
+    # 指定したデッキIDの採用カードと枚数の一覧を生成する
+    def _getDeckRecipe(self,df,deck_id):
+        df = df[df['deck_id'] == deck_id]
+        dup = df[['master_id', 'count']]
+        unDup = dup[dup.duplicated(keep='last') == False]
+        return unDup.to_dict(orient='records')
+
+    def get(self,df):
+        temp = {}
+        l = self._getDeckIDList(df)
+        for id in l:
+            temp[id] = {
+                'items' : self._getDeckRecipe(df,id)
+            }
+        return temp
+
 class CLDeckAnalizer:
     reject_deck_id = []
 

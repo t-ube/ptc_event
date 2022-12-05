@@ -61,7 +61,7 @@ for index, date in enumerate(reversed(dateList)):
     dfB = dfA[(dfA['rank'] == 1)]
 
     analizer = clDeckAnalizer.CLDeckAnalizer()
-
+    provider = clDeckAnalizer.CLDeckListProvider()
     writeData['items'].append({
         'index': index,
         'deck_count': analizer.getDeckCount(dfA),
@@ -70,7 +70,9 @@ for index, date in enumerate(reversed(dateList)):
         'card_list': analizer.getCardIdRow(dfA).to_dict(orient='records'),
         'deck_type': analizer.getDeckType(dfA),
         'deck_type_rank1': analizer.getDeckType(dfB),
+        'deck_recipe': provider.get(dfA)
     })
 
 with open('./dist/cl.json', 'w') as f:
-    json.dump(writeData, f, indent=4)
+    json.dump(writeData, f)
+    #json.dump(writeData, f, indent=4)

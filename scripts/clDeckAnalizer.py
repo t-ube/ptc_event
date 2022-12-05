@@ -10,7 +10,7 @@ class CLDeckListProvider:
     def _getDeckRecipe(self,df,deck_id):
         df = df[df['deck_id'] == deck_id]
         dup = df[['master_id', 'card_id', 'count']]
-        unDup = dup[dup.duplicated(keep='last') == False]
+        unDup = dup[dup.duplicated(subset=['card_id', 'count'], keep='last') == False]
         return unDup.to_dict(orient='records')
 
     def get(self,df):

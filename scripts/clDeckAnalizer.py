@@ -9,7 +9,7 @@ class CLDeckListProvider:
     # 指定したデッキIDの採用カードと枚数の一覧を生成する
     def _getDeckRecipe(self,df,deck_id):
         df = df[df['deck_id'] == deck_id]
-        dup = df[['master_id', 'count']]
+        dup = df[['master_id', 'card_id', 'count']]
         unDup = dup[dup.duplicated(keep='last') == False]
         return unDup.to_dict(orient='records')
 

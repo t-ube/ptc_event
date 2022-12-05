@@ -40,15 +40,8 @@ for file in files:
 df2 = pd.concat(data_list, axis=0, sort=True)
 #df2.to_csv('./dist/cl_card.csv')
 
-print('---------------')
-print(len(df))
 dummy = clDeckAnalizer.CLDeckDummyCardProvider()
-df3 = dummy.get(df, df2)
-df = pd.merge(df, df2, left_on='card_id', right_on='official_id')
-print(len(df))
-df = pd.concat([df, df3])
-print(len(df))
-print('---------------')
+df = dummy.get(df, df2)
 #print(df)
 #df[df['card_type']== 'ポケモン'].to_csv('./dist/cl_card_all.csv')
 

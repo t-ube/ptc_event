@@ -4,12 +4,35 @@ class CLDeckDummyCardProvider:
     def get(self, cl_deck: pd.DataFrame, card_list: pd.DataFrame):
         cl_deck['card_id'] = cl_deck['card_id'].astype(str)
         card_list['official_id'] = card_list['official_id'].astype(str)
+
+        print('最初の件数:'+str(len(cl_deck)))
+        #print(cl_deck.columns.values)
+
         app_card_id = card_list['official_id'].to_list()
         result = cl_deck['card_id'].apply(lambda x: any(char in x for char in app_card_id))
-        targetDf = cl_deck[~result]
+        noneDf = cl_deck[~result]
+        print('除外件数:'+str(len(noneDf)))
+        #print(noneDf.columns.values)
+
         # 重複はなくす
-        temp = card_list[card_list.duplicated(['name'], keep='last') == False]
-        df = pd.merge(targetDf, temp, left_on='card_name', right_on='name')
+        nameListDf = card_list[card_list.duplicated(['name'], keep='last') == False]
+        dummyDf = pd.merge(noneDf, nameListDf, left_on='card_name', right_on='name')
+        print('ダミー件数:'+str(len(dummyDf)))
+        #print(dummyDf.columns.values)
+
+        result = cl_deck['card_id'].apply(lambda x: any(char in x for char in app_card_id))
+        findDf = cl_deck[result]
+        print('該当件数:'+str(len(findDf)))
+        #print(findDf.columns.values)
+
+        unionDf = pd.merge(findDf, card_list, left_on='card_id', right_on='official_id')
+        unDup = unionDf[unionDf.duplicated(subset=['card_id', 'card_name', 'count', 'deck_id', 'event_id', 'player_id'],keep='last') == False]
+        print('結合後の該当件数:'+str(len(unDup)))
+        #print(unDup.columns.values)
+
+        df = unDup.append(dummyDf, ignore_index=True)
+        print('最終件数:'+str(len(df)))
+        #print(df.columns.values)
         return df
 
 class CLDeckListProvider:

@@ -74,6 +74,6 @@ for index, date in enumerate(reversed(dateList)):
         'deck_recipe': provider.get(dfA)
     })
 
-with open('./dist/cl.json', 'w') as f:
-    json.dump(writeData, f)
-    #json.dump(writeData, f, indent=4)
+with open('./dist/cl.json', 'w', encoding='utf_8_sig') as f:
+    json.dump(writeData, f, ensure_ascii=False)
+    #json.dump(writeData, f, , ensure_ascii=False, indent=4)

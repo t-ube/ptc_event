@@ -15,9 +15,21 @@ class CLDeckDummyCardProvider:
         #print(noneDf.columns.values)
 
         # 重複はなくす
-        nameListDf = card_list[card_list.duplicated(['name'], keep='last') == False]
+        # ポケモンは完全にレギュ落ちするのでダミーを生成しない
+        nameListDf = card_list[card_list['card_type'] != 'ポケモン']
+        nameListDf = nameListDf[nameListDf.duplicated(['name'], keep='last') == False]
         dummyDf = pd.merge(noneDf, nameListDf, left_on='card_name', right_on='name')
         print('ダミー件数:'+str(len(dummyDf)))
+
+        print('----------')
+        test = []
+        l1 = noneDf['card_id'].to_list()
+        l2 = dummyDf['card_id'].to_list()
+        for i1 in l1:
+            if i1 not in l2:
+                test.append(i1)
+        print(test)
+        print('----------')
         #print(dummyDf.columns.values)
 
         result = cl_deck['card_id'].apply(lambda x: any(char in x for char in app_card_id))

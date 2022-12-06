@@ -122,7 +122,7 @@ class CLDeckAnalizer:
     def getDeckInfo(self,df):
         if len(df) == 0:
             return {'count': 0, 'deck_id': []}
-        dup = df[['event_id','player_id','deck_id','rank']]
+        dup = df[['event_id', 'event_name', 'sponsorship', 'player_id', 'player_name','deck_id','rank']]
         unDup = dup[dup.duplicated(keep='last') == False].sort_values(by=['rank'], ascending=[True])
         return {'count': len(unDup),
                 'deck_id':unDup.to_dict(orient='records')}

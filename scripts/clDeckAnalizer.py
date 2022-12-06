@@ -66,7 +66,7 @@ class CLDeckListProvider:
         df.loc[(df['card_type'] == 'トレーナーズ') & (df['sub_type'] == 'スタジアム'), 'card_type'] = 'D' # staDium
         df.loc[df['card_type'] == 'エネルギー', 'card_type'] = 'E'
         
-        dup = df[['master_id', 'card_id', 'card_type', 'count']]
+        dup = df[['master_id', 'card_id', 'card_type', 'name', 'count']]
         unDup = dup[dup.duplicated(subset=['card_id', 'count'], keep='last') == False]
         return unDup.to_dict(orient='records')
 
@@ -122,7 +122,8 @@ class CLDeckAnalizer:
     def getDeckInfo(self,df):
         if len(df) == 0:
             return {'count': 0, 'deck_id': []}
-        dup = df[['event_id', 'event_name', 'sponsorship', 'player_id', 'player_name','deck_id','rank']]
+        #df['date'] = df['date'].dt.strftime("%Y/%m/%d %H:%M:%S")
+        dup = df[['datetime', 'event_id', 'event_name', 'sponsorship', 'player_id', 'player_name','deck_id','rank']]
         unDup = dup[dup.duplicated(keep='last') == False].sort_values(by=['rank'], ascending=[True])
         return {'count': len(unDup),
                 'deck_info':unDup.to_dict(orient='records')}

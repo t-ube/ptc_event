@@ -167,6 +167,20 @@ class CLDeckAnalizer:
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
         filterDf = df[(df['name'] == 'ギラティナVSTAR') & (df['move1'] == 'ロストインパクト') & (df['count'] >= 1)]
+        df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
+        filterDf = df[(df['name'] == 'レジドラゴVSTAR') & (df['move1'] == 'りゅうむそう')]
+        newDf = self.getNewDfFromDeckIDNotIn(df,filterDf)
+        return (newDf)
+
+    # レジドラゴVSTAR
+    def getRejidoragoVSTAR(self,df):
+        result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
+        df = df[~result]
+        filterDf = df[(df['name'] == 'レジドラゴVSTAR') & (df['move1'] == 'りゅうむそう')]
+        df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
+        filterDf = df[(df['name'] == 'レジドラゴV') & (df['move1'] == 'てんのさけび')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
 
@@ -507,6 +521,9 @@ class CLDeckAnalizer:
         
         giratina = self.getGirateinaVSTAR(df)
         self.addRejectList(giratina)
+
+        rejidorago = self.getRejidoragoVSTAR(df)
+        self.addRejectList(rejidorago)
         
         numerugon = self.getHisuinumerugonVSTAR(df)
         self.addRejectList(numerugon)
@@ -531,6 +548,9 @@ class CLDeckAnalizer:
         
         parukiaKixyremu = self.getParukiaKixyremu(df)
         self.addRejectList(parukiaKixyremu)
+
+        deiaruga = self.getDeiaruga(df)
+        self.addRejectList(deiaruga)
         
         lostzonebox = self.getLostZoneBox(df)
         self.addRejectList(lostzonebox)
@@ -561,9 +581,6 @@ class CLDeckAnalizer:
         
         iberutal = self.getIberutaruControl(df)
         self.addRejectList(iberutal)
-
-        deiaruga = self.getDeiaruga(df)
-        self.addRejectList(deiaruga)
 
         rotomu = self.getRotomu(df)
         self.addRejectList(rotomu)
@@ -596,6 +613,7 @@ class CLDeckAnalizer:
             'myu_vmax': self.getDeckInfo(myu),
             'rugia_vstar': self.getDeckInfo(rugia),
             'girateina_vstar': self.getDeckInfo(giratina),
+            'rejidorago_vstar': self.getDeckInfo(rejidorago),
             'hisui_numerugon_vstar': self.getDeckInfo(numerugon),
             'aru_jixyura': self.getDeckInfo(aruJixyura),
             'reji': self.getDeckInfo(reji),

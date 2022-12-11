@@ -67,7 +67,8 @@ class CLDeckListProvider:
         df.loc[df['card_type'] == 'エネルギー', 'card_type'] = 'E'
         
         df = df.fillna({'regulation': ''})
-        dup = df[['master_id', 'card_id', 'card_type', 'name', 'regulation', 'count']]
+        df = df.fillna({'official_id': ''})
+        dup = df[['master_id', 'card_id', 'card_type', 'name', 'regulation', 'official_id', 'count']]
         unDup = dup[dup.duplicated(subset=['card_id', 'count'], keep='last') == False]
         return unDup.to_dict(orient='records')
 

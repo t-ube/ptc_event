@@ -125,6 +125,7 @@ class CLDeckAnalizer:
         if len(df) == 0:
             return {'count': 0, 'deck_id': []}
         #df['date'] = df['date'].dt.strftime("%Y/%m/%d %H:%M:%S")
+        df = df.fillna({'sponsorship': ''})
         dup = df[['datetime', 'event_id', 'event_name', 'sponsorship', 'player_id', 'player_name','deck_id','rank']]
         unDup = dup[dup.duplicated(keep='last') == False].sort_values(by=['rank'], ascending=[True])
         return {'count': len(unDup),

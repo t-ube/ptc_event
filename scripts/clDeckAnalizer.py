@@ -465,11 +465,22 @@ class CLDeckAnalizer:
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
 
-    # ロストゾーンBox
+    # ロストバレットBox
     def getLostZoneBox(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
         filterDf = df[(df['name'] == 'ウッウ') & (df['ability'] == 'ロストプロバイド')]
+        df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
+        filterDf = df[(df['name'] == 'キュワワー') & (df['ability'] == 'はなえらび')]
+        newDf = self.getNewDfFromDeckID(df,filterDf)
+        return (newDf)
+
+    # ロストジュラルドン Lost/Jixyurarudon
+    def getLostJixyura(self,df):
+        result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
+        df = df[~result]
+        filterDf = df[(df['name'] == 'ジュラルドンVMAX') & (df['ability'] == 'まてんろう')]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
         filterDf = df[(df['name'] == 'キュワワー') & (df['ability'] == 'はなえらび')]
@@ -557,6 +568,9 @@ class CLDeckAnalizer:
         
         lostzonebox = self.getLostZoneBox(df)
         self.addRejectList(lostzonebox)
+
+        lostjixyura = self.getLostJixyura(df)
+        self.addRejectList(lostjixyura)
         
         hapimiru = self.getHapiMiru(df)
         self.addRejectList(hapimiru)
@@ -626,6 +640,7 @@ class CLDeckAnalizer:
             'kokuba': self.getDeckInfo(kokuba),
             'hakuba': self.getDeckInfo(hakuba),
             'lostzone_box': self.getDeckInfo(lostzonebox),
+            'lost_jixyura': self.getDeckInfo(lostjixyura),
             'hapi_miru': self.getDeckInfo(hapimiru),
             'aru_pika': self.getDeckInfo(arupika),
             'runa_soru': self.getDeckInfo(runasoru),

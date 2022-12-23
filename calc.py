@@ -38,6 +38,10 @@ for file in files:
     'official_id': str})
     data_list.append(dfCard)
 df2 = pd.concat(data_list, axis=0, sort=True)
+
+# ここで最新のレギュレーションに切り替え
+reguUpdate = clDeckAnalizer.CLDeckRegulationUpdater()
+df2 = reguUpdate.get(df2)
 #df2.to_csv('./dist/cl_card.csv')
 
 dummy = clDeckAnalizer.CLDeckDummyCardProvider()

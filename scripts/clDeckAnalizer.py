@@ -1,5 +1,50 @@
 import pandas as pd
 
+class CLDeckRegulationUpdater:
+    def get(self,df:pd.DataFrame):
+        # 同名扱いのカードはこのフラグで吸収
+        df['hakase'] = False
+        df['boss'] = False
+
+        df_modified = df.copy()
+        df_modified = df_modified[df_modified['card_type'] == 'トレーナーズ']
+        df_modified = df_modified[df_modified['regulation'] != '-']
+
+        dfHakase = df_modified[df_modified['name'].str.contains('博士の研究')]
+        dfHakase['hakase'] = True
+        df_modified.update(dfHakase)
+
+        dfBoss = df_modified[df_modified['name'].str.contains('ボスの指令')]
+        dfBoss['boss'] = True
+        df_modified.update(dfBoss)
+
+        df_modified = df_modified.sort_values(by=['regulation'], ascending=[True])
+
+        df_temp = df_modified[~df_modified.duplicated(keep='last', subset=['name'])]
+        # この時点で df_temp には名前が同じカードはない
+
+        # 同名カードのレギュレーションを最後のレギュレーションで上書き
+        for index, row in df_temp.iterrows():
+            df_modified.loc[df_modified['name'] == row['name'], 'regulation'] = row['regulation']
+
+        # 博士の研究を含むカード
+        df_temp = df_modified[df_modified['hakase'] == True]
+        df_temp = df_temp[~df_temp.duplicated(keep='last', subset=['hakase'])]
+        for index, row in df_temp.iterrows():
+            df_modified.loc[(df_modified['hakase'] == True), 'regulation'] = row['regulation']
+
+        # ボスの指令を含むカード
+        df_temp = df_modified[df_modified['boss'] == True]
+        df_temp = df_temp[~df_temp.duplicated(keep='last', subset=['boss'])]
+        for index, row in df_temp.iterrows():
+            df_modified.loc[(df_modified['boss'] == True), 'regulation'] = row['regulation']
+
+        # 更新
+        df.update(df_modified)
+        df = df.drop(columns={'hakase','boss'})
+
+        return df
+
 class CLDeckDummyCardProvider:
     def get(self, cl_deck: pd.DataFrame, card_list: pd.DataFrame):
         cl_deck['card_id'] = cl_deck['card_id'].astype(str)

@@ -175,6 +175,14 @@ class CLDeckAnalizer:
         unDup = dup[dup.duplicated(keep='last') == False].sort_values(by=['rank'], ascending=[True])
         return {'count': len(unDup),
                 'deck_info':unDup.to_dict(orient='records')}
+
+    def addDeckType(self,df,deck_type):
+        #df['date'] = df['date'].dt.strftime("%Y/%m/%d %H:%M:%S")
+        df['deck_type'] = deck_type
+        df = df.fillna({'sponsorship': ''})
+        dup = df[['datetime', 'event_id', 'deck_type', 'event_name', 'sponsorship', 'player_id', 'player_name','deck_id','rank']]
+        unDup = dup[dup.duplicated(keep='last') == False].sort_values(by=['rank'], ascending=[True])
+        return unDup
     
     def getDeckIDList(self,df):
         if len(df) == 0:
@@ -567,6 +575,147 @@ class CLDeckAnalizer:
         print(len(self.reject_deck_id))
         l=self.getDeckIDList(df)
         if len(l): self.reject_deck_id.extend(l)
+
+    def getDeckList(self,df):
+        self.ResetRejectList()
+
+        myu = self.addDeckType(self.getMyuVMAX(df),'myu_vmax')
+        self.addRejectList(myu)
+        
+        rugia = self.addDeckType(self.getRugiaVSTAR(df),'rugia_vstar')
+        self.addRejectList(rugia)
+        
+        giratina = self.addDeckType(self.getGirateinaVSTAR(df),'girateina_vstar')
+        self.addRejectList(giratina)
+
+        rejidorago = self.addDeckType(self.getRejidoragoVSTAR(df),'rejidorago_vstar')
+        self.addRejectList(rejidorago)
+        
+        numerugon = self.addDeckType(self.getHisuinumerugonVSTAR(df),'hisui_numerugon_vstar')
+        self.addRejectList(numerugon)
+        
+        aruJixyura = self.addDeckType(self.getAruJixyura(df),'aru_jixyura')
+        self.addRejectList(aruJixyura)
+
+        reji = self.addDeckType(self.getReji(df),'reji')
+        self.addRejectList(reji)
+
+        kokuba = self.addDeckType(self.getKokuba(df),'kokuba')
+        self.addRejectList(kokuba)
+        
+        hakuba = self.addDeckType(self.getHakuba(df),'hakuba')
+        self.addRejectList(hakuba)
+        
+        parukia = self.addDeckType(self.getParukiaVSTAR(df),'parukia')
+        self.addRejectList(parukia)
+        
+        kixyremu = self.addDeckType(self.getKixyremu(df),'kixyremu')
+        self.addRejectList(kixyremu)
+        
+        parukiaKixyremu = self.addDeckType(self.getParukiaKixyremu(df),'parukia_kixyremu')
+        self.addRejectList(parukiaKixyremu)
+
+        deiaruga = self.addDeckType(self.getDeiaruga(df),'deiaruga')
+        self.addRejectList(deiaruga)
+        
+        lostzonebox = self.addDeckType(self.getLostZoneBox(df),'lostzone_box')
+        self.addRejectList(lostzonebox)
+
+        lostjixyura = self.addDeckType(self.getLostJixyura(df),'lost_jixyura')
+        self.addRejectList(lostjixyura)
+        
+        hapimiru = self.addDeckType(self.getHapiMiru(df),'hapi_miru')
+        self.addRejectList(hapimiru)
+
+        arupika = self.addDeckType(self.getAruPika(df),'aru_pika')
+        self.addRejectList(arupika)
+        
+        runasoru = self.addDeckType(self.getRunaSoru(df),'runa_soru')
+        self.addRejectList(runasoru)
+
+        zoroaku = self.addDeckType(self.getZoroaku(df),'zoroaku')
+        self.addRejectList(zoroaku)
+
+        dogasudaina = self.addDeckType(self.getDogasuDaina(df),'dogasu_daina')
+        self.addRejectList(dogasudaina)
+
+        dogasubatto = self.addDeckType(self.getDogasuBatto(df),'dogasu_batto')
+        self.addRejectList(dogasubatto)
+        
+        erekiganon = self.addDeckType(self.getErekiganon(df),'ereki_ganon')
+        self.addRejectList(erekiganon)
+
+        myuutsu= self.addDeckType(self.getMyuutsuVunion(df),'myuutsu')
+        self.addRejectList(myuutsu)
+        
+        iberutal = self.addDeckType(self.getIberutaruControl(df),'iberutal')
+        self.addRejectList(iberutal)
+
+        rotomu = self.addDeckType(self.getRotomu(df),'rotomu')
+        self.addRejectList(rotomu)
+        
+        aruura = self.addDeckType(self.getAruUra(df),'aru_ura')
+        self.addRejectList(aruura)
+        
+        aruseusu = self.addDeckType(self.getAruseusu(df),'aruseusu')
+        self.addRejectList(aruseusu)
+        
+        urakou = self.addDeckType(self.getUrakou(df),'urakou')
+        self.addRejectList(urakou)
+
+        hisuizoroaku = self.addDeckType(self.getHisuiZoroaku(df),'hisui_zoroaku')
+        self.addRejectList(hisuizoroaku)
+        
+        dainaburakki = self.addDeckType(self.getDainaBurakki(df),'daina_burakki')
+        self.addRejectList(dainaburakki)
+        
+        aianto = self.addDeckType(self.getAianto(df),'aianto')
+        self.addRejectList(aianto)
+        
+        dogasu = self.addDeckType(self.getDogasu(df),'dogasu')
+        self.addRejectList(dogasu)
+        
+        others = self.addDeckType(self.getOthers(df),'others')
+        self.addRejectList(others)
+
+        decks = pd.concat([
+            myu,
+            rugia,
+            giratina,
+            rejidorago,
+            numerugon,
+            aruJixyura,
+            reji,
+            kokuba,
+            hakuba,
+            parukia,
+            kixyremu,
+            parukiaKixyremu,
+            deiaruga,
+            lostzonebox,
+            lostjixyura,
+            hapimiru,
+            arupika,
+            runasoru,
+            zoroaku,
+            dogasudaina,
+            dogasubatto,
+            erekiganon,
+            myuutsu,
+            iberutal,
+            rotomu,
+            aruura,
+            aruseusu,
+            urakou,
+            hisuizoroaku,
+            dainaburakki,
+            aianto,
+            dogasu,
+            others
+        ])
+
+        return decks.to_dict(orient='records')
+
 
     def getDeckType(self,df):
 

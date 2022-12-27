@@ -73,8 +73,7 @@ for index, date in enumerate(reversed(dateList)):
         'begindate': begindate.strftime('%Y-%m-%d %H:%M:%S'),
         'enddate' : enddate.strftime('%Y-%m-%d %H:%M:%S'),
         'card_list': analizer.getCardIdRow(dfA).to_dict(orient='records'),
-        'deck_type': analizer.getDeckType(dfA),
-        'deck_type_rank1': analizer.getDeckType(dfB),
+        'deck_list': analizer.getDeckList(dfA),
         'deck_recipe': provider.get(dfA)
     })
 

@@ -25,7 +25,7 @@ for file in files:
     'player_name': str,'deck_id': str,'card_id': str,'card_name': str,'count': int})
     data_list.append(df)
 
-df = pd.concat(data_list, axis=0, sort=True)
+df = pd.concat(data_list, axis=0, ignore_index=True, sort=True)
 #print(getDeckCount(df))
 #df.to_csv('./dist/cl_all.csv')
 
@@ -37,7 +37,7 @@ for file in files:
     'name': str, 'ability': str , 'move1': str, 'move2': str, 'regulation': str,
     'official_id': str})
     data_list.append(dfCard)
-df2 = pd.concat(data_list, axis=0, sort=True)
+df2 = pd.concat(data_list, axis=0, ignore_index=True, sort=True)
 
 # ここで最新のレギュレーションに切り替え
 reguUpdate = clDeckAnalizer.CLDeckRegulationUpdater()

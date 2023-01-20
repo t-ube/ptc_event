@@ -9,15 +9,8 @@ class CLDeckRegulationUpdater:
         df_modified = df.copy()
         df_modified = df_modified[df_modified['card_type'] == 'トレーナーズ']
         df_modified = df_modified[df_modified['regulation'] != '-']
-
-        dfHakase = df_modified[df_modified['name'].str.contains('博士の研究')]
-        dfHakase['hakase'] = True
-        df_modified.update(dfHakase)
-
-        dfBoss = df_modified[df_modified['name'].str.contains('ボスの指令')]
-        dfBoss['boss'] = True
-        df_modified.update(dfBoss)
-
+        df_modified.loc[df_modified['name'].str.contains('博士の研究'),'hakase'] = True
+        df_modified.loc[df_modified['name'].str.contains('ボスの指令'),'boss'] = True
         df_modified = df_modified.sort_values(by=['regulation'], ascending=[True])
 
         df_temp = df_modified[~df_modified.duplicated(keep='last', subset=['name'])]

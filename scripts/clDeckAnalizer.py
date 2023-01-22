@@ -187,6 +187,7 @@ class CLDeckAnalizer:
     def getMyuVMAX(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ミュウVMAX') & (df['move1'] == 'クロスフュージョン')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -195,6 +196,7 @@ class CLDeckAnalizer:
     def getReji(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'レジギガス') & (df['ability'] == 'こだいのえいち')]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -207,6 +209,7 @@ class CLDeckAnalizer:
     def getRotomu(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ロトムVSTAR') & (df['move1'] == 'スクラップパルス') & (df['count'] >= 1)]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -215,6 +218,7 @@ class CLDeckAnalizer:
     def getGirateinaVSTAR(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ギラティナVSTAR') & (df['move1'] == 'ロストインパクト') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -226,6 +230,7 @@ class CLDeckAnalizer:
     def getRejidoragoVSTAR(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'レジドラゴVSTAR') & (df['move1'] == 'りゅうむそう')]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -237,6 +242,7 @@ class CLDeckAnalizer:
     def getHisuinumerugonVSTAR(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ヒスイヌメルゴンVSTAR') & (df['move1'] == 'アイアンローリング') & (df['count'] >= 1)]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -245,6 +251,7 @@ class CLDeckAnalizer:
     def getParukiaVSTAR(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'オリジンパルキアVSTAR') & (df['move1'] == 'あくうのうねり') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -256,6 +263,7 @@ class CLDeckAnalizer:
     def getKixyremu(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'キュレムVMAX') & (df['ability'] == 'はくぎんせかい')]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -267,6 +275,7 @@ class CLDeckAnalizer:
     def getParukiaKixyremu(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'オリジンパルキアVSTAR') & (df['move1'] == 'あくうのうねり')]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -278,6 +287,7 @@ class CLDeckAnalizer:
     def getDeiaruga(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'オリジンディアルガVSTAR') & (df['move1'] == 'メタルブラスト')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -286,6 +296,7 @@ class CLDeckAnalizer:
     def getAruPika(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'アルセウスVSTAR') & (df['move1'] == 'トリニティノヴァ') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -297,6 +308,7 @@ class CLDeckAnalizer:
     def getAruUra(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'アルセウスVSTAR') & (df['move1'] == 'トリニティノヴァ')]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -308,6 +320,7 @@ class CLDeckAnalizer:
     def getAruseusu(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'アルセウスVSTAR') & (df['move1'] == 'トリニティノヴァ')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -316,6 +329,8 @@ class CLDeckAnalizer:
     def getIberutaruControl(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
+
         filterDf = df[(df['name'] == 'イベルタル') & (df['move1'] == 'はかいのさけび')]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -363,6 +378,7 @@ class CLDeckAnalizer:
     def getUrakou(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'インテレオン') & (df['ability'] == 'うらこうさく')]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -374,6 +390,7 @@ class CLDeckAnalizer:
     def getErekiganon(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'クワガノンV') & (df['move1'] == 'パラライズボルト')]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -385,6 +402,7 @@ class CLDeckAnalizer:
     def getDainaBurakki(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ムゲンダイナVMAX') & (df['ability'] == 'ムゲンゾーン')]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -396,6 +414,7 @@ class CLDeckAnalizer:
     def getDogasuDaina(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ムゲンダイナVMAX') & (df['ability'] == 'ムゲンゾーン') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -407,6 +426,7 @@ class CLDeckAnalizer:
     def getDogasuBatto(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'クロバットVMAX') & (df['move1'] == 'ステルスポイズン') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -418,6 +438,7 @@ class CLDeckAnalizer:
     def getDogasu(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ガラルマタドガス') & (df['ability'] == 'かがくへんかガス')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -426,6 +447,7 @@ class CLDeckAnalizer:
     def getZoroaku(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ゾロアーク') & (df['ability'] == 'げんえいへんげ') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -437,6 +459,7 @@ class CLDeckAnalizer:
     def getRugiaVSTAR(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ルギアVSTAR') & (df['ability'] == 'アッセンブルスター') & (df['count'] >= 1)]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -445,6 +468,7 @@ class CLDeckAnalizer:
     def getAruJixyura(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ジュラルドンVMAX') & (df['ability'] == 'まてんろう') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -456,6 +480,7 @@ class CLDeckAnalizer:
     def getHapiMiru(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ハピナスV') & (df['ability'] == 'しぜんかいふく') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -480,6 +505,7 @@ class CLDeckAnalizer:
     def getMyuutsuVunion(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ミュウツーV-UNION') & (df['ability'] == 'フォトンバリア')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -488,6 +514,7 @@ class CLDeckAnalizer:
     def getRunaSoru(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ソルロック') & (df['ability'] == 'サンエナジー') & (df['count'] >= 1)]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -499,6 +526,7 @@ class CLDeckAnalizer:
     def getKokuba(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'こくばバドレックスVMAX') & (df['ability'] == 'めいかいのとびら') & (df['count'] >= 1)]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -507,6 +535,7 @@ class CLDeckAnalizer:
     def getHakuba(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'はくばバドレックスVMAX') & (df['move2'] == 'ダイランス') & (df['count'] >= 1)]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
@@ -515,6 +544,7 @@ class CLDeckAnalizer:
     def getLostZoneBox(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ウッウ') & (df['ability'] == 'ロストプロバイド')]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -526,6 +556,7 @@ class CLDeckAnalizer:
     def getLostJixyura(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ジュラルドンVMAX') & (df['ability'] == 'まてんろう')]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
@@ -537,8 +568,9 @@ class CLDeckAnalizer:
     def getHisuiZoroaku(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ヒスイゾロアークVSTAR') & (df['move1'] == 'のろいをきざむ')]
-        df = self.getNewDfFromDeckID(df,filterDf)
+        newDf = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
         filterDf = df[(df['name'] == 'ゲンガー') & (df['ability'] == 'ならくのうらもん')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
@@ -548,10 +580,50 @@ class CLDeckAnalizer:
     def getAianto(self,df):
         result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
         df = df[~result]
+        if len(df) == 0: return df
         filterDf = df[(df['name'] == 'アイアント') & (df['move2'] == 'くいあらす')]
         df = self.getNewDfFromDeckID(df,filterDf)
         if len(df) == 0: return df
         filterDf = df[(df['name'] == 'のろいのスコップ')]
+        newDf = self.getNewDfFromDeckID(df,filterDf)
+        return (newDf)
+
+    # ダークライ ブロロローム
+    def getDarkraiBuroro(self,df):
+        result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
+        df = df[~result]
+        if len(df) == 0: return df
+        filterDf = df[(df['name'] == 'ダークライVSTAR') & (df['ability'] == 'スターアビス')]
+        df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
+        filterDf = df[(df['name'] == 'ブロロローム') & (df['ability'] == 'ランブルエンジン')]
+        newDf = self.getNewDfFromDeckID(df,filterDf)
+        return (newDf)
+
+    # ミライドンex
+    def getMiraidon(self,df):
+        result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
+        df = df[~result]
+        if len(df) == 0: return df
+        filterDf = df[(df['name'] == 'ミライドンex') & (df['ability'] == 'タンデムユニット')]
+        newDf = self.getNewDfFromDeckID(df,filterDf)
+        return (newDf)
+
+    # サーナイトex
+    def getSirnight(self,df):
+        result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
+        df = df[~result]
+        if len(df) == 0: return df
+        filterDf = df[(df['name'] == 'サーナイトex') & (df['ability'] == 'サイコエンブレイス')]
+        newDf = self.getNewDfFromDeckID(df,filterDf)
+        return (newDf)
+
+    # パフュートンex
+    def getPerfuton(self,df):
+        result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
+        df = df[~result]
+        if len(df) == 0: return df
+        filterDf = df[(df['name'] == 'パフュートンex') & (df['move1'] == 'きょうらんのかおり')]
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
 
@@ -580,6 +652,15 @@ class CLDeckAnalizer:
         
         giratina = self.addDeckType(self.getGirateinaVSTAR(df),'girateina_vstar')
         self.addRejectList(giratina)
+
+        darkraiburoro = self.addDeckType(self.getDarkraiBuroro(df),'darkrai_buroro')
+        self.addRejectList(darkraiburoro)
+
+        miraidon = self.addDeckType(self.getMiraidon(df),'miraidon')
+        self.addRejectList(miraidon)
+
+        sirnight = self.addDeckType(self.getSirnight(df),'sirnight')
+        self.addRejectList(sirnight) 
 
         rejidorago = self.addDeckType(self.getRejidoragoVSTAR(df),'rejidorago_vstar')
         self.addRejectList(rejidorago)
@@ -629,11 +710,11 @@ class CLDeckAnalizer:
         zoroaku = self.addDeckType(self.getZoroaku(df),'zoroaku')
         self.addRejectList(zoroaku)
 
-        dogasudaina = self.addDeckType(self.getDogasuDaina(df),'dogasu_daina')
-        self.addRejectList(dogasudaina)
+        #dogasudaina = self.addDeckType(self.getDogasuDaina(df),'dogasu_daina')
+        #self.addRejectList(dogasudaina)
 
-        dogasubatto = self.addDeckType(self.getDogasuBatto(df),'dogasu_batto')
-        self.addRejectList(dogasubatto)
+        #dogasubatto = self.addDeckType(self.getDogasuBatto(df),'dogasu_batto')
+        #self.addRejectList(dogasubatto)
         
         erekiganon = self.addDeckType(self.getErekiganon(df),'ereki_ganon')
         self.addRejectList(erekiganon)
@@ -665,8 +746,8 @@ class CLDeckAnalizer:
         aianto = self.addDeckType(self.getAianto(df),'aianto')
         self.addRejectList(aianto)
         
-        dogasu = self.addDeckType(self.getDogasu(df),'dogasu')
-        self.addRejectList(dogasu)
+        #dogasu = self.addDeckType(self.getDogasu(df),'dogasu')
+        #self.addRejectList(dogasu)    
         
         others = self.addDeckType(self.getOthers(df),'others')
         self.addRejectList(others)
@@ -675,6 +756,9 @@ class CLDeckAnalizer:
             myu,
             rugia,
             giratina,
+            darkraiburoro,
+            miraidon,
+            sirnight,
             rejidorago,
             numerugon,
             aruJixyura,
@@ -691,8 +775,6 @@ class CLDeckAnalizer:
             arupika,
             runasoru,
             zoroaku,
-            dogasudaina,
-            dogasubatto,
             erekiganon,
             myuutsu,
             iberutal,
@@ -703,7 +785,9 @@ class CLDeckAnalizer:
             hisuizoroaku,
             dainaburakki,
             aianto,
-            dogasu,
+            #dogasudaina, '23.01.23 廃止
+            #dogasubatto, '23.01.23 廃止
+            #dogasu, '23.01.23 廃止
             others
         ])
 

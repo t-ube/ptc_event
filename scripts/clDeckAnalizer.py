@@ -173,6 +173,8 @@ class CLDeckAnalizer:
         #df['date'] = df['date'].dt.strftime("%Y/%m/%d %H:%M:%S")
         df['deck_type'] = deck_type
         df = df.fillna({'sponsorship': ''})
+        if len(df) == 0:
+            return pd.DataFrame(columns=['datetime', 'event_id', 'deck_type', 'event_name', 'sponsorship', 'player_id', 'player_name','deck_id','rank'])
         dup = df[['datetime', 'event_id', 'deck_type', 'event_name', 'sponsorship', 'player_id', 'player_name','deck_id','rank']]
         unDup = dup[dup.duplicated(keep='last') == False].sort_values(by=['rank'], ascending=[True])
         return unDup

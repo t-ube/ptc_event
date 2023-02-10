@@ -351,6 +351,17 @@ class CLDeckAnalizer:
         newDf = self.getNewDfFromDeckID(df,filterDf)
         return (newDf)
 
+    # ロストギラティナ Girateina
+    def getLostGira(self,df):
+        result = df['deck_id'].apply(lambda x: any(char in x for char in self.reject_deck_id))
+        df = df[~result]
+        if len(df) == 0: return df
+        filterDf = df[(df['name'] == 'ギラティナVSTAR') & (df['move1'] == 'ロストインパクト') & (df['count'] >= 1)]
+        df = self.getNewDfFromDeckID(df,filterDf)
+        if len(df) == 0: return df
+        filterDf = df[(df['name'] == 'キュワワー') & (df['ability'] == 'はなえらび')]
+        newDf = self.getNewDfFromDeckID(df,filterDf)
+        return (newDf)
 
     # アルセウス ARUSEUSU
     def getAruseusu(self,df):
@@ -709,11 +720,11 @@ class CLDeckAnalizer:
         
         rugia = self.addDeckType(self.getRugiaVSTAR(df),'rugia_vstar')
         self.addRejectList(rugia)
-        
+
         arugira = self.addDeckType(self.getAruGira(df),'aru_gira')
         self.addRejectList(arugira)
 
-        giratina = self.addDeckType(self.getGirateinaVSTAR(df),'girateina_vstar')
+        giratina = self.addDeckType(self.getLostGira(df),'girateina_vstar')
         self.addRejectList(giratina)
 
         darkraiburoro = self.addDeckType(self.getDarkraiBuroro(df),'darkrai_buroro')
@@ -834,6 +845,7 @@ class CLDeckAnalizer:
             myu,
             rugia,
             giratina,
+            arugira,
             darkraiburoro,
             miraidonregieleki,
             miraidon,

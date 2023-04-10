@@ -44,7 +44,6 @@ jobs:
     - name: Build data
       run: |
         python3 crawler.py
-        python3 upload.py
     - name: Commit files
       run: |
         git config --local user.email "ube@coder.okinawa.jp"

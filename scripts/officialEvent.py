@@ -468,7 +468,7 @@ class officialEventRankerCsvBot():
             print("I/O error")
 
 class officialEventCsvBot():
-    def download(self, drvWrapper, out_dir, start_page):
+    def download(self, drvWrapper, out_dir, id_list, start_page):
         # カード一覧へ移動
         Path(out_dir).mkdir(parents=True, exist_ok=True)
         page_no = start_page
@@ -485,8 +485,10 @@ class officialEventCsvBot():
                 l = parser.getEventList()
                 for item in l:
                     print(item)
-                    if rankerBot.isFile(str(item['event_id']), out_dir) == True:
-                        print('skip event:'+str(item['event_id']))
+                    if str(item['event_id']) in id_list:
+                        print('already exists. skip event:'+str(item['event_id']))
+                    elif rankerBot.isFile(str(item['event_id']), out_dir) == True:
+                        print('file is already exists. skip event:'+str(item['event_id']))
                         #find_next = False
                         #break
                     else:

@@ -66,6 +66,24 @@ class eventIDIndexReader:
             print(e.args)
         return []
 
+# event_id_index_30d の読み取り用
+class eventIdUpdatedIndexReader:
+    def read(self, supabase:Client):
+        try:
+            data = supabase.table("event_id_index_30d").select("event_id_list").execute()
+            if len(data.data) == 0:
+                return []
+            if data.data[0]['event_id_list'] == None:
+                return []
+            return data.data[0]['event_id_list'].split(',')
+        except httpx.ReadTimeout as e:
+            print("httpx.ReadTimeout")
+            print(e.args)
+        except postgrest.exceptions.APIError as e:
+            print("postgrest.exceptions.APIError")
+            print(e.args)
+        return []
+    
 # event_deck_item の削除用
 class eventDeckItemCleaner:
     def limit(self,base_date):

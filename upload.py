@@ -34,6 +34,7 @@ def getDeckData(file:str, cardDf):
     return newDf
 
 def isFileData(file:str):
+    print(file+':'+str(os.path.getsize(file))+' Byte')
     if os.path.getsize(file) > 200:
         return False
     return True

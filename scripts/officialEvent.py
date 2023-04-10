@@ -427,6 +427,7 @@ class officialEventRankerCsvBot():
             except TimeoutException as e:
                 print("ERROR event : "+event_id)
                 print("TimeoutException")
+                find_next = False
             except Exception as e:
                 print("ERROR event : "+event_id)
                 print(traceback.format_exc())

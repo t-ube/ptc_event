@@ -36,8 +36,8 @@ def getDeckData(file:str, cardDf):
 def isFileData(file:str):
     print(file+':'+str(os.path.getsize(file))+' Byte')
     if os.path.getsize(file) > 200:
-        return False
-    return True
+        return True
+    return False
 
 url: str = os.environ.get("SUPABASE_URL")
 key: str = os.environ.get("SUPABASE_ANON_KEY")

@@ -34,11 +34,9 @@ def getDeckData(file:str, cardDf):
     return newDf
 
 def isFileData(file:str):
-    with open(file) as f:
-        first_line = f.readline()
-        if len(first_line.strip()) == 0:
-            return False
-        return True
+    if os.path.getsize(file) > 200:
+        return False
+    return True
 
 url: str = os.environ.get("SUPABASE_URL")
 key: str = os.environ.get("SUPABASE_ANON_KEY")
@@ -72,9 +70,9 @@ for file in files:
         if event_id in updated_id_list:
             print('skip:'+event_id)
             continue
+        print('write:'+event_id)
         records = []
         df = getDeckData(file,cardDf)
-        print('write:'+event_id)
         for index, row in df.iterrows():
             records.append(row)
         batch_results = editor.getEventDeckItem(records)

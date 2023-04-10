@@ -33,6 +33,12 @@ def getDeckData(file:str, cardDf):
     newDf = pd.merge(df, cardDf, left_on='card_id', right_on='card_id', how='inner')
     return newDf
 
+def isFileData(file:str):
+    with open(file) as f:
+        first_line = f.readline()
+        if len(first_line.strip()) == 0:
+            return False
+        return True
 
 url: str = os.environ.get("SUPABASE_URL")
 key: str = os.environ.get("SUPABASE_ANON_KEY")
@@ -61,14 +67,15 @@ updated_id_list = reader.read(supabase)
 data_list = []
 files = glob.glob("./data/cl/*.csv")
 for file in files:
-    event_id = os.path.splitext(os.path.basename(file))[0]
-    if event_id in updated_id_list:
-        print('skip:'+event_id)
-        continue
-    records = []
-    df = getDeckData(file,cardDf)
-    print('write:'+event_id)
-    for index, row in df.iterrows():
-        records.append(row)
-    batch_results = editor.getEventDeckItem(records)
-    result = writer.write(supabase, "event_deck_item", batch_results)
+    if isFileData(file) == True:
+        event_id = os.path.splitext(os.path.basename(file))[0]
+        if event_id in updated_id_list:
+            print('skip:'+event_id)
+            continue
+        records = []
+        df = getDeckData(file,cardDf)
+        print('write:'+event_id)
+        for index, row in df.iterrows():
+            records.append(row)
+        batch_results = editor.getEventDeckItem(records)
+        result = writer.write(supabase, "event_deck_item", batch_results)

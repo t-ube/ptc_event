@@ -5,8 +5,17 @@ from pathlib import Path
 import os
 import json
 import datetime
+import os
+from supabase import create_client, Client 
 from scripts import jst
 from scripts import clDeckAnalizer
+from scripts import supabaseUtil
+
+def isFileData(file:str):
+    print(file+':'+str(os.path.getsize(file))+' Byte')
+    if os.path.getsize(file) > 200:
+        return True
+    return False
 
 ip = socket.gethostbyname(socket.gethostname())
 print(ip)
@@ -16,14 +25,28 @@ print(currentDT)
 
 Path('./dist').mkdir(parents=True, exist_ok=True)
 
+url: str = os.environ.get("SUPABASE_URL")
+key: str = os.environ.get("SUPABASE_ANON_KEY")
+service_key: str = os.environ.get("SUPABASE_SERVICE_KEY")
+
+supabase: Client = create_client(url, key)
+supabase.postgrest.auth(service_key)
+
+reader = supabaseUtil.eventIdUpdatedIndexReader()
+updated_id_list = reader.read(supabase)
+
 data_list = []
 files = glob.glob("./data/cl/*.csv")
 for file in files:
-    df = pd.read_csv(file,
-    dtype={'date': str,'datetime': str,'event_type': str,'event_name': str,'sponsorship': str,
-    'address': str,'event_id': str,'event_url': str,'rank': int,'player_id': str,
-    'player_name': str,'deck_id': str,'card_id': str,'card_name': str,'count': int})
-    data_list.append(df)
+    if isFileData(file) == True:
+        filename = os.path.basename(file)
+        filename_without_extension = os.path.splitext(filename)[0]
+        if filename_without_extension in updated_id_list:
+            df = pd.read_csv(file,
+            dtype={'date': str,'datetime': str,'event_type': str,'event_name': str,'sponsorship': str,
+            'address': str,'event_id': str,'event_url': str,'rank': int,'player_id': str,
+            'player_name': str,'deck_id': str,'card_id': str,'card_name': str,'count': int})
+            data_list.append(df)
 
 df = pd.concat(data_list, axis=0, ignore_index=True, sort=True)
 #print(getDeckCount(df))
@@ -52,7 +75,7 @@ df = dummy.get(df, df2)
 baseDT = datetime.datetime(*currentDT.timetuple()[:3])
 baseDT = baseDT + datetime.timedelta(days=1)
 dateList = pd.date_range(
-    baseDT - datetime.timedelta(days=7*7),
+    baseDT - datetime.timedelta(days=7*4),
     baseDT - datetime.timedelta(days=7),
     freq='7D')
 df['date'] = df['date']+' 00:00:00'
